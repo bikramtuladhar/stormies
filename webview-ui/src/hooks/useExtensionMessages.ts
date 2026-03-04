@@ -84,6 +84,8 @@ export function useExtensionMessages(
     let pendingAgents: Array<{ id: number; palette?: number; hueShift?: number; seatId?: string; folderName?: string; name?: string }> = []
 
     const handler = (e: MessageEvent) => {
+      // Only process messages from the same origin (same local file:// window)
+      if (e.origin !== window.location.origin) return
       const msg = e.data
       const os = getOfficeState()
 
