@@ -84,7 +84,7 @@ class WebviewBridge(val browser: JBCefBrowser) {
         ApplicationManager.getApplication().invokeLater {
             try {
                 browser.cefBrowser.executeJavaScript(
-                    "window.postMessage(JSON.parse('$escaped'), '*');",
+                    "window.postMessage(JSON.parse('$escaped'), window.location.origin || '*');",
                     "", 0
                 )
             } catch (e: Exception) {
